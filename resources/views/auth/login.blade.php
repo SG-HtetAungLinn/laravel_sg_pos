@@ -14,14 +14,22 @@
                                     <h4>Rosella</h4>
                                 </a>
 
-                                <form class="mt-5 mb-5 login-input">
+                                <form class="mt-5 mb-5 login-input" action="{{ route('login.store') }}" method="post">
+                                    @csrf
                                     <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Email">
+                                        <input type="email" class="form-control" name="email" placeholder="Email"
+                                            value="{{ old('email') }}">
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Password">
+                                        <input type="password" class="form-control" name="password" placeholder="Password">
+                                        @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
-                                    <button class="btn login-form__btn submit w-100">Sign In</button>
+                                    <button class="btn login-form__btn submit w-100" type="submit">Sign In</button>
                                 </form>
                                 <p class="mt-5 login-form__footer">Dont have account? <a
                                         href="{{ route('auth.registerPage') }}" class="text-primary">Sign Up</a> now</p>

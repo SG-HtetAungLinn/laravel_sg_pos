@@ -2,18 +2,37 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\UserController;
 
 Route::get('login', [AuthController::class, 'loginPage'])->name('auth.loginPage');
 
 Route::get('register', [AuthController::class, 'registerPage'])->name('auth.registerPage');
 // Route::
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+Route::get('/', [AuthController::class, 'checkRole'])->name('auth.checkRole');
+Route::middleware(['authCheck'])->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+    Route::prefix('user')->group(function () {
+        Route::get('home', [UserController::class, 'home'])->name('user.home');
+    });
+    Route::prefix('admin')->group(function () {
+        Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+
+        // Category
+        Route::prefix('category')->group(function () {
+            Route::get('/', [CategoryController::class, 'categoryList'])->name('category.list');
+            // create
+            Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
+            Route::post('/store', [CategoryController::class, 'store'])->name('category.store');
+            // delete
+            Route::get('delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+            // Edit
+            Route::get('edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+            Route::post('update/{id}', [CategoryController::class, 'update'])->name('category.update');
+        });
+        Route::resource('discount', DiscountController::class);
+    });
 });

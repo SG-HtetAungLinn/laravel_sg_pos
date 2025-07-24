@@ -16,19 +16,22 @@
                                 <form class="mt-5 mb-5 login-input" action="{{ route('register.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <input type="text" name="name" class="form-control" placeholder="Name">
+                                        <input type="text" name="name" class="form-control" placeholder="Name"
+                                            value="{{ old('name') }}" />
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" name="email" class="form-control" placeholder="Email">
+                                        <input type="email" name="email" class="form-control"
+                                            placeholder="Email"value="{{ old('email') }}" />
                                         @error('email')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="phone" class="form-control" placeholder="Phone">
+                                        <input type="text" name="phone" class="form-control" placeholder="Phone"
+                                            value="{{ old('phone') }}" />
                                         @error('phone')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -36,14 +39,14 @@
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" value="male" id="male"
-                                                name="gender" />
+                                                name="gender" @if (old('gender') == 'male') checked @endif />
                                             <label class="form-check-label" for="male">
                                                 Male
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" value="female" id="female"
-                                                name="gender" />
+                                                name="gender" @if (old('gender') == 'female') checked @endif />
                                             <label class="form-check-label" for="female">
                                                 Female
                                             </label>
@@ -53,7 +56,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <textarea name="address" class="form-control" cols="30" rows="2" placeholder="Address"></textarea>
+                                        <textarea name="address" class="form-control" cols="30" rows="2" placeholder="Address">{{ old('address') }}</textarea>
                                         @error('address')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -72,7 +75,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <button class="btn login-form__btn submit w-100">Sign in</button>
+                                    <button class="btn login-form__btn submit w-100">Sign Up</button>
                                 </form>
                                 <p class="mt-5 login-form__footer">Have account <a href="{{ route('auth.loginPage') }}"
                                         class="text-primary">Sign In </a> now</p>
