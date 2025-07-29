@@ -1,22 +1,22 @@
 @extends('layouts.admin')
 
-@section('title', 'Category Create')
+@section('title', 'Payment Type Create')
 
 @section('content')
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center">
-                <h1>Category Create</h1>
-                <a href="{{ route('category.list') }}" class="btn btn-dark">Back</a>
+                <h1>Payment Type Create</h1>
+                <a href="{{ route('paymentType.list') }}" class="btn btn-dark">Back</a>
             </div>
             <div class="d-flex justify-content-center">
                 <div class="col-md-6">
                     <div class="card my-4">
                         <div class="card-body">
-                            <form action="{{ route('category.store') }}" method="POST">
+                            <form action="{{ route('paymentType.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label class="form-label" for="name">Category Name</label>
+                                    <label class="form-label" for="name">Payment Type Name</label>
                                     <input type="text" name="name" id="name"
                                         class="form-control @error('name') is-invalid @endif"
                                         value="{{ old('name') }}" />

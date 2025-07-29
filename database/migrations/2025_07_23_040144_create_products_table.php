@@ -20,6 +20,7 @@ return new class extends Migration
             $table->float('purchase_price');
             $table->date('expire_date')->nullable();
             $table->text('description')->nullable();
+            $table->string('thumb_img', 255);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

@@ -17,7 +17,16 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('category.list') }}">List</a></li>
-                    <li><a href="">Create</a></li>
+                    <li><a href="{{ route('category.create') }}">Create</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">Discount</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('discount.index') }}">List</a></li>
+                    <li><a href="{{ route('discount.create') }}">Create</a></li>
                 </ul>
             </li>
             <li class="mega-menu mega-menu-sm">

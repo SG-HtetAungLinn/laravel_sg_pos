@@ -31,15 +31,7 @@
 </head>
 
 <body>
-    <div id="preloader">
-        <div class="loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3"
-                    stroke-miterlimit="10" />
-            </svg>
-        </div>
-    </div>
-    <div id="main-wrapper">
+    <div id="main-wrapper show">
         @include('layouts.partials.nav')
         @include('layouts.partials.header')
         @include('layouts.partials.aside')
@@ -48,7 +40,7 @@
                 @yield('content')
             </div>
         </div>
-        @include('layouts.partials.footer')
+        {{-- @include('layouts.partials.footer') --}}
     </div>
     <script src="{{ asset('plugins/common/common.min.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>
@@ -90,6 +82,8 @@
     <script src="{{ asset('plugins/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 
     <script src="{{ asset('js/plugins-init/form-pickers-init.js') }}"></script>
+    <script src="{{ asset('vendor/jsvalidation/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
     @yield('script')
 </body>
 

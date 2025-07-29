@@ -61,10 +61,13 @@ class DiscountController extends Controller
     public function update(DiscountUpdateRequest $request, $id)
     {
         $res = Discount::where('id', $id)->update([
-            'name' => $request->name
+            'name'          => $request->name,
+            'percent'       => $request->percent,
+            'start_date'    => $request->start_date,
+            'end_date'      => $request->end_date,
         ]);
         if ($res) {
-            return to_route('discount.list')->with(['success' => 'Discount Update Success']);
+            return to_route('discount.index')->with(['success' => 'Discount Update Success']);
         }
     }
 }

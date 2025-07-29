@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\PaymentTypeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 
 Route::get('login', [AuthController::class, 'loginPage'])->name('auth.loginPage');
@@ -34,5 +36,24 @@ Route::middleware(['authCheck'])->group(function () {
             Route::post('update/{id}', [CategoryController::class, 'update'])->name('category.update');
         });
         Route::resource('discount', DiscountController::class);
+        Route::prefix('payment_type')->group(function () {
+            Route::get('/', [PaymentTypeController::class, 'list'])->name('paymentType.list');
+            // create
+            Route::get('/create', [PaymentTypeController::class, 'create'])->name('paymentType.create');
+            Route::post('/store', [PaymentTypeController::class, 'store'])->name('paymentType.store');
+            // delete
+            Route::get('delete/{id}', [PaymentTypeController::class, 'delete'])->name('paymentType.delete');
+            // Edit
+            Route::get('edit/{id}', [PaymentTypeController::class, 'edit'])->name('paymentType.edit');
+            Route::post('update/{id}', [PaymentTypeController::class, 'update'])->name('paymentType.update');
+        });
+
+        Route::prefix('product')->group(function () {
+            Route::get('/', [ProductController::class, 'list'])->name('product.list');
+            Route::get('/create', [ProductController::class, 'create'])->name('product.create');
+            Route::post('/store', [ProductController::class, 'store'])->name('product.store');
+            Route::get('image/{id}', [ProductController::class, 'imageCreate'])->name('product.imageCreate');
+            Route::post('image/{id}', [ProductController::class, 'imageStore'])->name('product.imageStore');
+        });
     });
 });

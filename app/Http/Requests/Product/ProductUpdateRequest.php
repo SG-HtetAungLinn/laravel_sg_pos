@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Discount;
+namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DiscountUpdateRequest extends FormRequest
+class ProductUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,10 +22,7 @@ class DiscountUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => ['required', 'min:3', 'max:255'],
-            'percent'       => ['required', 'numeric', 'min:1', 'max:100'],
-            'start_date'    => ['required', 'date'],
-            'end_date'      => ['required', 'date', 'after_or_equal:start_date']
+            //
         ];
     }
 }

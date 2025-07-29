@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
-@section('title', 'Discount List')
+@section('title', 'Payment Type List')
 
 @section('content')
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1>Discount List</h1>
-                <a href="{{ route('discount.create') }}" class="btn btn-primary">Create</a>
+                <h1>Payment Type List</h1>
+                <a href="{{ route('paymentType.create') }}" class="btn btn-primary">Create</a>
             </div>
             @if (session('success'))
                 <div class="col-md-4 offset-md-8">
@@ -26,36 +26,30 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Percent</th>
                                 <th>Create Date</th>
                                 <th>Update Date</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($discounts) > 0)
-                                @foreach ($discounts as $index => $item)
+                            @if (count($paymentTypes) > 0)
+                                @foreach ($paymentTypes as $index => $item)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->percent }}%</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td>
-                                            <a href="{{ route('discount.edit', $item->id) }}"
+                                            <a href="{{ route('paymentType.edit', $item->id) }}"
                                                 class="btn btn-sm btn-info">Edit</a>
-                                            <form action="{{ route('discount.destroy', $item->id) }}" method="POST"
-                                                class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                            </form>
+                                            <a href="{{ route('paymentType.delete', $item->id) }}"
+                                                class="btn btn-sm btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="6" class="text-center">
+                                    <td colspan="5" class="text-center">
                                         There is no data.
                                     </td>
                                 </tr>
