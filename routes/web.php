@@ -35,7 +35,15 @@ Route::middleware(['authCheck'])->group(function () {
             Route::get('edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
             Route::post('update/{id}', [CategoryController::class, 'update'])->name('category.update');
         });
+
+        // Discount
         Route::resource('discount', DiscountController::class);
+        Route::prefix('discount')->group(function () {
+            Route::get('add_item/{id}', [DiscountController::class, 'addItem'])->name('discount.addItem');
+            Route::post('storeItem/{id}', [DiscountController::class, 'storeItem'])->name('discount.storeItem');
+        });
+
+        // payment_type
         Route::prefix('payment_type')->group(function () {
             Route::get('/', [PaymentTypeController::class, 'list'])->name('paymentType.list');
             // create
@@ -50,10 +58,16 @@ Route::middleware(['authCheck'])->group(function () {
 
         Route::prefix('product')->group(function () {
             Route::get('/', [ProductController::class, 'list'])->name('product.list');
+            Route::post('/list', [ProductController::class, 'discountProduct'])->name('product.discountProduct');
+
             Route::get('/create', [ProductController::class, 'create'])->name('product.create');
             Route::post('/store', [ProductController::class, 'store'])->name('product.store');
             Route::get('image/{id}', [ProductController::class, 'imageCreate'])->name('product.imageCreate');
             Route::post('image/{id}', [ProductController::class, 'imageStore'])->name('product.imageStore');
+            Route::get('edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+            Route::post('update/{id}', [ProductController::class, 'update'])->name('product.update');
+            Route::get('delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+            Route::get('details/{id}', [ProductController::class, 'details'])->name('product.details');
         });
     });
 });

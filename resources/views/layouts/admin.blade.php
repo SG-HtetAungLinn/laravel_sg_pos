@@ -8,7 +8,7 @@
 
     <!-- theme meta -->
     <meta name="theme-name" content="quixlab" />
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title'):Admin POS</title>
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.png') }}">
     <!-- Custom Stylesheet -->
@@ -25,8 +25,11 @@
     <link href="{{ asset('plugins/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <script src="{{ asset('js/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('js/jquery/dist/jquery.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     @yield('style')
 </head>
 
@@ -84,6 +87,18 @@
     <script src="{{ asset('js/plugins-init/form-pickers-init.js') }}"></script>
     <script src="{{ asset('vendor/jsvalidation/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
+    <script>
+        let token = document.head.querySelector('meta[name="csrf-token"]');
+        if (token) {
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": token.content,
+                },
+            });
+        } else {
+            console.error("CSRF Token not found.");
+        }
+    </script>
     @yield('script')
 </body>
 

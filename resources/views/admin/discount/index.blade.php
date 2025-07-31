@@ -27,8 +27,10 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Percent</th>
-                                <th>Create Date</th>
-                                <th>Update Date</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Create At</th>
+                                <th>Update At</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -39,6 +41,8 @@
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->percent }}%</td>
+                                        <td>{{ $item->start_date }}</td>
+                                        <td>{{ $item->end_date }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td>
@@ -50,6 +54,8 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                             </form>
+                                            <a href="{{ route('discount.addItem', $item->id) }}"
+                                                class="btn btn-sm btn-secondary">+</a>
                                         </td>
                                     </tr>
                                 @endforeach

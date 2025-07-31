@@ -25,7 +25,7 @@
     <div class="d-flex justify-content-between">
         <h1>Product Create</h1>
         <div class="">
-            <a href="" class="btn btn-dark">
+            <a href="{{ route('product.list') }}" class="btn btn-dark">
                 Back
             </a>
         </div>
@@ -37,7 +37,9 @@
                 <div class="card-body">
                     <div class="preview_img_container">
                         <div class="d-flex flex-wrap my-3 preview_img" style="gap: 10px;">
-
+                            @foreach ($image as $item)
+                                <img src="{{ $item->getImage() }}" alt="" class="preview_img">
+                            @endforeach
                         </div>
                     </div>
                     <form action="{{ route('product.imageStore', $id) }}" method="POST" enctype="multipart/form-data">

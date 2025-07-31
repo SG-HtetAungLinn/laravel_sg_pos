@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Category\CategoryCreateRequest;
 use App\Http\Requests\Category\CategoryUpdateRequest;
 use App\Models\Category;
+use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class CategoryController extends Controller
 {
     public function categoryList()
     {
-        $categories = Category::get();
+        $categories = Category::paginate(10);
         return view('admin.category.index', compact('categories'));
     }
 
@@ -39,6 +40,12 @@ class CategoryController extends Controller
     public function delete($id)
     {
         if ($id) {
+            $product_count = Product::where('category_id', $id)->count();
+            if ($product_count > 0) {
+                return back()->with(
+                    ['error' => 'Category Delete Fail.Please delete first child data']
+                );
+            }
             $res = Category::where('id', $id)->delete();
             if ($res) {
                 return back()->with(

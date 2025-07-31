@@ -19,6 +19,16 @@
                     </div>
                 </div>
             @endif
+            @if (session('error'))
+                <div class="col-md-4 offset-md-8">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{ session('error') }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            @endif
             <div class="card my-4">
                 <div class="card-body">
                     <table class="table table-hover">
@@ -56,6 +66,9 @@
                             @endif
                         </tbody>
                     </table>
+                    <div class="">
+                        {{ $categories->links('pagination::bootstrap-5') }}
+                    </div>
                 </div>
             </div>
         </div>
